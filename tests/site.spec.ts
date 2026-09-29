@@ -18,7 +18,7 @@ test('Every page: metadata, images, seven viewports and visual captures', async 
     descriptions.add(await page.locator('meta[name=description]').getAttribute('content') || '');
     await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex, nofollow');
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', await page.title());
-    await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://teren-architecture.sweet-hake-2744.chatgpt.site${route}`);
+    await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://teren-architecture.coookiemail.chatgpt.site${route}`);
     await page.locator('img').evaluateAll(async images => { await Promise.all(images.map(async image => { if (image instanceof HTMLImageElement) { image.loading = 'eager'; await image.decode(); } })); });
     expect(await page.locator('img').evaluateAll(images => images.every(image => image instanceof HTMLImageElement && image.naturalWidth > 0 && !!image.alt && !!image.srcset))).toBe(true);
     const name = route === '/' ? 'home' : route.replaceAll('/','-');
