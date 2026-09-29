@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
+import Plan from '../../components/Plan.astro';
+import { projects } from '../../data/projects';
+export function getStaticPaths() { return projects.map((project, i) => ({ params: { slug: project.id }, props: { project, next: projects[(i+1) % projects.length] } })); }
+const { project: p, next } = Astro.props;
+const residence = p.id === 'residence-01';
+const secondImage = residence ? 'interior' : p.image;
+---
+<Layout title={p.title} description={`${p.title}. ${p.text} ${p.area}, ${p.year}. Портфолийная концепция TEREN.`}>
+  <section class="case-heading wrap"><a class="back-link" href="/projects/">Все проекты / {p.n}</a><div><h1>{p.title}<span class="accent">.</span></h1><span class="eyebrow">{p.en}</span></div><p class="concept-note">{p.status} · Portfolio concept</p></section>
+  <figure class="case-hero"><Picture name={p.image} alt={p.alt} eager /><figcaption class="wrap">{p.n} / {p.en} — исследование пространства, {p.year}</figcaption></figure>
+  <section class="case-overview section wrap"><dl class="case-metadata">{[['Тип',p.type],['Локация',p.location],['Площадь',p.area],['Год',p.year],['Статус','Концепция / не реализован']].map(([label,value])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl><div><span class="eyebrow">01 / Идея</span><h2 data-reveal>{p.concept}</h2><p>{p.text}</p><p>{p.detail}</p></div></section>
+  <section class="case-gallery wrap" aria-label="Визуальное исследование"><figure class="gallery-wide"><Picture name={secondImage} alt={residence ? 'Общая столовая: дубовый стол и сквозная перспектива в зелёный двор' : p.alt} /><figcaption><span>01 / {residence ? 'Внутренний объём' : 'Общий вид'}</span><span>Свет как часть планировки</span></figcaption></figure><div class="gallery-pair"><div class="gallery-text"><span class="eyebrow">02 / Деталь</span><h2>{residence ? 'Граница, которую можно открыть.' : 'Масштаб прикосновения.'}</h2><p>{residence ? 'Раздвижное остекление соединяет столовую с садом. Единый уровень пола делает переход незаметным, а глубокая кровля смягчает прямое солнце.' : 'Фактура поверхности меняется в течение дня. Крупный объём раскрывается через небольшие детали: стык, тень, край материала.'}</p></div><figure class="detail-crop"><Picture name={secondImage} alt={residence ? 'Фрагмент интерьера: фактура дуба, камня и мягкий дневной свет' : `Фрагмент проекта «${p.title}»: фактура материала`} sizes="(max-width: 760px) 100vw, 50vw" /><figcaption>Фрагмент визуализации / исследование материала</figcaption></figure></div></section>
+  <section class="plan-section section wrap"><div><span class="eyebrow">03 / Планировочное решение</span><h2>{residence ? 'Жизнь вокруг двора.' : 'Связи важнее границ.'}</h2><p>{p.detail}</p><ul><li>Ясное разделение общих и тихих зон</li><li>Короткие маршруты между основными помещениями</li><li>Визуальная связь с открытым пространством</li></ul></div><Plan kind={residence ? 'residence' : p.image} /></section>
+  <section class="materials section wrap"><div class="section-heading"><span class="eyebrow">04 / Палитра материалов</span><h2>Три материала.<br />Цельное ощущение.</h2></div><ol>{p.materials.map((material,i)=><li><span>0{i+1}</span><h3>{material}</h3><p>{['Основа. Масса, фактура и спокойный цвет.','Тепло. Поверхность, с которой соприкасаются каждый день.','Баланс. Мягкость света и тактильный контраст.'][i]}</p></li>)}</ol></section>
+  <figure class="case-finale"><Picture name={p.image} alt={`Финальный вид концепции «${p.title}»`} /><figcaption>Место определяет архитектуру.</figcaption></figure>
+  <a class="next-project wrap" href={`/projects/${next.id}/`}><span class="eyebrow">Следующий проект / {next.n}</span><h2>{next.title}</h2><Picture name={next.image} alt={next.alt} sizes="240px" /></a>
+</Layout>

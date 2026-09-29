@@ -1,0 +1,35 @@
+---
+import '@fontsource-variable/golos-text';
+import '../styles/global.css';
+import Mark from '../components/Mark.astro';
+interface Props { title: string; description: string; dark?: boolean }
+const { title, description, dark = false } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site);
+const nav = [['/projects/', 'Проекты'], ['/studio/', 'Студия'], ['/services/', 'Услуги'], ['/contact/', 'Контакты']];
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — TEREN</title><meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" /><link rel="canonical" href={canonical} />
+    <meta property="og:title" content={`${title} — TEREN`} /><meta property="og:description" content={description} />
+    <meta property="og:type" content="website" /><meta property="og:url" content={canonical} /><meta property="og:locale" content="ru_RU" />
+    <meta name="theme-color" content="#edeae3" /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class:list={[{ 'dark-page': dark }]}>
+    <a class="skip" href="#main">К содержанию</a>
+    <header class="header wrap">
+      <a class="brand" href="/" aria-label="TEREN — главная"><Mark /><span>TEREN</span></a>
+      <span class="brand-note">Архитектура<br />и пространство</span>
+      <nav class="desktop-nav" aria-label="Основная навигация">{nav.map(([href, label]) => <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>)}</nav>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"><span>Меню</span><span class="menu-lines" aria-hidden="true"></span></button>
+    </header>
+    <dialog id="mobile-menu" class="mobile-menu" aria-label="Навигация"><div class="menu-top"><a class="brand" href="/" aria-label="TEREN — главная"><Mark /><span>TEREN</span></a><button class="menu-close" autofocus>Закрыть <span aria-hidden="true">×</span></button></div><nav aria-label="Мобильная навигация">{nav.map(([href, label], i) => <a href={href}><small aria-hidden="true">0{i + 1}</small>{label}</a>)}</nav><p>Архитектура начинается с места.</p><small>TEREN / PORTFOLIO CONCEPT</small></dialog>
+    <noscript><nav class="no-js-nav wrap" aria-label="Навигация без JavaScript">{nav.map(([href,label])=><a href={href}>{label}</a>)}</nav><style>.menu-toggle{display:none!important}.no-js-nav{display:flex;flex-wrap:wrap;gap:10px 24px;padding-block:15px;border-bottom:1px solid var(--line)}.no-js-nav a{padding-block:12px;font-size:14px}@media(min-width:761px){.no-js-nav{display:none}}</style></noscript>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="footer wrap"><div class="footer-top"><a class="brand" href="/" aria-label="TEREN — главная"><Mark /><span>TEREN</span></a><p>Место. Материал. Человек.</p><a href="#main">В начало</a></div><div class="footer-bottom"><span>© TEREN, 2026</span><span>Portfolio concept · вымышленная студия</span><span>Изображения созданы с помощью ИИ</span></div></footer>
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

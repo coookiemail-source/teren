@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Mark from '../components/Mark.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+---
+<Layout title="Студия и подход" description="TEREN — концептуальная независимая архитектурная практика. Работа с контекстом, натуральными материалами и повседневными сценариями.">
+  <section class="page-heading studio-heading wrap"><div class="eyebrow"><span>Студия / Манифест</span><span>Место. Материал. Человек.</span></div><h1>Внимание —<br />наш главный инструмент<span class="accent">.</span></h1><div class="studio-intro"><Mark /><p>TEREN — независимая архитектурная практика в формате портфолийной концепции. Мы исследуем, как простые пространственные решения меняют повседневную жизнь.</p></div></section>
+  <figure class="studio-image wrap"><Picture name="interior" alt="Исследование рабочего пространства: большой общий стол, натуральные материалы и свет из сада" eager /><figcaption>Общий стол как принцип работы. Концептуальная визуализация, не фотография офиса.</figcaption></figure>
+  <section class="studio-statement section wrap"><span class="eyebrow">01 / Отношение к месту</span><h2 data-reveal>Здание не существует<br />отдельно от земли.<br /><span class="muted">Интерьер — от человека.</span></h2><p>Мы начинаем с наблюдения. Выясняем, что уже есть на участке, как меняется освещение и где проходят естественные маршруты. Затем убираем противоречия, пока решение не становится ясным.</p></section>
+  <section class="studio-method section wrap"><div class="section-heading"><span class="eyebrow">02 / Метод</span><h2>Один проект.<br />Несколько точек зрения.</h2></div><div class="method-rows">{[['Общий стол','Архитектура, интерьер и предметная среда обсуждаются вместе. Решения проверяются на стыке дисциплин.'],['Рабочий макет','Сравниваем варианты в плане, объёме и масштабе человека. Макет помогает увидеть то, что скрывает красивая картинка.'],['Образец в руках','Смотрим материалы при естественном свете. Проверяем не только цвет, но и стык, фактуру и способ ухода.'],['Открытый диалог','Фиксируем аргументы и договорённости. Каждое изменение должно решать конкретную задачу.']].map(([title,text],i)=><article><span>0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+  <section class="studio-material wrap"><Picture name="residence" alt="Крупная фактура каменных стен в архитектуре дома с внутренним садом" /><div><span class="eyebrow">03 / Материал и время</span><h2>Поверхности<br />с правом стареть.</h2><p>Мы выбираем материалы, которые можно понять на ощупь. Следы жизни не портят их — делают точнее связь между человеком и местом.</p><a class="text-link" href="/projects/">Посмотреть в проектах <span class="tiny-square" aria-hidden="true"></span></a></div></section>
+  <aside class="honesty-note wrap"><span class="eyebrow">О проекте</span><p>TEREN — вымышленный бренд, созданный для портфолио. Проекты, площади и локации служат демонстрации. У студии нет заявленных реальных клиентов, сотрудников или наград. Все визуализации созданы с помощью ИИ.</p></aside>
+  <ContactCTA />
+</Layout>

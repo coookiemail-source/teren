@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { projects } from '../../data/projects';
+---
+<Layout title="Проекты" description="Три исследования масштаба: частный дом, жилой интерьер и общественный павильон. Концептуальные проекты TEREN.">
+  <section class="page-heading wrap"><div class="eyebrow"><span>Индекс / 2025–2026</span><span>01—03</span></div><h1>Места для жизни<span class="accent">.</span></h1><div class="page-lead"><p>Разные задачи. Общий язык.<br />Архитектура, интерьер и ландшафт в единой системе.</p><span class="concept-note">Все проекты — вымышленные концепции.<br />Не являются реализованными объектами.</span></div></section>
+  <section class="project-editorial wrap" aria-label="Каталог проектов">{projects.map(p => <article class={`editorial-project project-${p.n}`}><div class="editorial-number" aria-hidden="true">{p.n}</div><a class="project-photo" href={`/projects/${p.id}/`} aria-label={`Открыть проект «${p.title}»`}><Picture name={p.image} alt={p.alt} eager={p.n === '01'} sizes="(max-width: 760px) 100vw, 80vw" /><span class="photo-action">Исследовать проект</span></a><div class="editorial-meta"><a href={`/projects/${p.id}/`}><h2>{p.title}</h2><span>{p.en}</span></a><dl><div><dt>Тип</dt><dd>{p.type}</dd></div><div><dt>Место</dt><dd>{p.location}</dd></div><div><dt>Площадь / год</dt><dd>{p.area} / {p.year}</dd></div></dl></div></article>)}</section>
+  <ContactCTA />
+</Layout>
